@@ -19,12 +19,13 @@ export function createBackendApp() {
   const app = express();
   app.set('trust proxy', 1);
 
-  // Security headers without frameguard/CSP blocking AI Studio preview iframe or Vite dev
+  // Security headers without frameguard/CSP blocking AI Studio preview iframe or Cloudflare-hosted assets
   app.use(
     helmet({
       contentSecurityPolicy: false,
       frameguard: false,
       crossOriginEmbedderPolicy: false,
+      crossOriginResourcePolicy: { policy: 'cross-origin' },
     })
   );
 

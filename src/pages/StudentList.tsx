@@ -37,7 +37,7 @@ import { StudentPromotionModal } from '../components/students/StudentPromotionMo
 import { Button, Card, Input, Label, Modal, Select } from '../components/ui/Primitives';
 import { useAuth } from '../contexts/AuthContext';
 import { useBranding } from '../contexts/BrandingContext';
-import { apiRequest } from '../services/api';
+import { apiRequest, resolveAssetUrl } from '../services/api';
 import type {
   StudentListResponse,
   StudentQrCard,
@@ -720,7 +720,7 @@ export function StudentList() {
                       <div className="flex items-center gap-3">
                         {s.photoUrl ? (
                           <img
-                            src={s.photoUrl}
+                            src={resolveAssetUrl(s.photoUrl)}
                             alt={s.fullName}
                             referrerPolicy="no-referrer"
                             className="w-9 h-9 rounded-lg object-cover border border-slate-200 dark:border-slate-700 shrink-0"
@@ -889,7 +889,7 @@ export function StudentList() {
               <div className="flex items-center gap-4">
                 {inspectStudent.photoUrl ? (
                   <img
-                    src={inspectStudent.photoUrl}
+                    src={resolveAssetUrl(inspectStudent.photoUrl)}
                     alt={inspectStudent.fullName}
                     referrerPolicy="no-referrer"
                     className="w-16 h-16 rounded-xl object-cover border border-slate-200 dark:border-slate-700"

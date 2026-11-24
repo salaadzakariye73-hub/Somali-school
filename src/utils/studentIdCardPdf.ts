@@ -1,5 +1,6 @@
 import { jsPDF } from 'jspdf';
 import QRCode from 'qrcode';
+import { resolveAssetUrl } from '../services/api';
 import type { SchoolSettings, StudentQrCard } from '../types/nexus';
 
 export type IdCardPdfLayout = 'cr80' | 'a4-sheet';
@@ -24,7 +25,8 @@ function isSafeImageUrl(url: string): boolean {
 }
 
 async function loadImageAsPng(url?: string | null): Promise<LoadedRaster | null> {
-  if (!url || !isSafeImageUrl(url)) return null;
+  const resolvedUrl = resolveAssetUrl(url);
+  if (!resolvedUrl || !isSafeImageUrl(resolvedUrl)) return null;
 
   return new Promise((resolve) => {
     const img = new Image();
@@ -55,7 +57,7 @@ async function loadImageAsPng(url?: string | null): Promise<LoadedRaster | null>
       }
     };
     img.onerror = () => resolve(null);
-    img.src = url;
+    img.src = resolvedUrl;
   });
 }
 

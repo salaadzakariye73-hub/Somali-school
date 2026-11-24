@@ -1,5 +1,6 @@
 import type { NextFunction, Request, Response } from 'express';
 import { db } from '../config/database.ts';
+import { env } from '../config/env.ts';
 import type { IRole, IUser, PermissionAction, SystemModule } from '../types/models.ts';
 import { hasPermission, resolveEffectivePermissions } from '../utils/permissions.ts';
 import { verifyAccessToken, verifyPassword } from '../utils/security.ts';
@@ -112,10 +113,14 @@ export function verifyCookieOrigin(req: Request, res: Response, next: NextFuncti
     next();
     return;
   }
-  if (origin && host) {
+  if (origin) {
     try {
       const parsed = new URL(origin);
-      if (parsed.host === host) {
+      if (host && parsed.host === host) {
+        next();
+        return;
+      }
+      if (env.corsOrigins.includes(parsed.origin) || (env.appUrl && parsed.origin === env.appUrl)) {
         next();
         return;
       }

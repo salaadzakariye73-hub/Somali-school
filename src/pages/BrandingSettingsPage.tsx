@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Shield, Upload } from 'lucide-react';
 import { Button, Card, Input, Label, Select } from '../components/ui/Primitives';
 import { useBranding } from '../contexts/BrandingContext';
-import { apiRequest } from '../services/api';
+import { apiRequest, resolveAssetUrl } from '../services/api';
 import type { LanguagePreference, SchoolSettings, ThemePreference } from '../types/nexus';
 
 export function BrandingSettingsPage() {
@@ -109,7 +109,7 @@ export function BrandingSettingsPage() {
             <div className="w-14 h-14 rounded-xl bg-white p-1.5 flex items-center justify-center shrink-0 overflow-hidden">
               {form.logoUrl ? (
                 <img
-                  src={form.logoUrl}
+                  src={resolveAssetUrl(form.logoUrl)}
                   alt={form.schoolName || 'School Logo'}
                   referrerPolicy="no-referrer"
                   className="w-full h-full object-contain rounded"

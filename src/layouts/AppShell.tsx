@@ -25,6 +25,7 @@ import {
 import { LanguageSwitcher, ThemeSwitcher } from '../components/LanguageThemeControls';
 import { useAuth } from '../contexts/AuthContext';
 import { useBranding } from '../contexts/BrandingContext';
+import { resolveAssetUrl } from '../services/api';
 import type { SystemModule } from '../types/nexus';
 import { cn } from '../utils/cn';
 
@@ -87,7 +88,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         <div className="w-10 h-10 rounded-lg border border-slate-200 dark:border-slate-700 bg-white p-1 flex items-center justify-center shrink-0 overflow-hidden">
           {settings?.logoUrl && !logoError ? (
             <img
-              src={settings.logoUrl}
+              src={resolveAssetUrl(settings.logoUrl)}
               alt={settings.schoolName}
               referrerPolicy="no-referrer"
               onError={() => setLogoError(true)}

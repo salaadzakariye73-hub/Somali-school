@@ -15,7 +15,7 @@ import { useForm, type FieldErrors } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { z } from 'zod';
 import { Button, Input, Label, Modal, Select } from '../ui/Primitives';
-import { apiRequest } from '../../services/api';
+import { apiRequest, resolveAssetUrl } from '../../services/api';
 import type { StudentRecord } from '../../types/nexus';
 import { cn } from '../../utils/cn';
 
@@ -546,7 +546,7 @@ export function StudentFormModal({ open, onClose, student, onSaved }: StudentFor
     .join('')
     .toUpperCase();
 
-  const displayedPhotoUrl = pendingPhotoDataUrl || student?.photoUrl || '';
+  const displayedPhotoUrl = pendingPhotoDataUrl || resolveAssetUrl(student?.photoUrl) || '';
 
   return (
     <Modal

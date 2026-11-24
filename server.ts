@@ -1,7 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import express from 'express';
-import { createServer as createViteServer } from 'vite';
 import { createBackendApp } from './backend/src/app.ts';
 import { connectDatabase } from './backend/src/config/database.ts';
 import { env } from './backend/src/config/env.ts';
@@ -14,6 +13,7 @@ async function startServer() {
   const app = createBackendApp();
 
   if (env.nodeEnv !== 'production') {
+    const { createServer: createViteServer } = await import('vite');
     const vite = await createViteServer({
       server: { middlewareMode: true },
       appType: 'spa',

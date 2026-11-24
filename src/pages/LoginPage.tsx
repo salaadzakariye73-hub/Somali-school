@@ -5,7 +5,7 @@ import { LanguageSwitcher, ThemeSwitcher } from '../components/LanguageThemeCont
 import { Button, Input, Label, Modal } from '../components/ui/Primitives';
 import { useAuth } from '../contexts/AuthContext';
 import { useBranding } from '../contexts/BrandingContext';
-import { apiRequest } from '../services/api';
+import { apiRequest, resolveAssetUrl } from '../services/api';
 
 const CAMPUS_BACKDROP = '/src/assets/images/campus_courtyard_view_1795505872041.jpg';
 
@@ -142,7 +142,7 @@ export function LoginPage() {
           <div className="w-14 h-14 rounded-xl bg-white/95 p-1.5 shadow-lg flex items-center justify-center shrink-0 overflow-hidden">
             {settings?.logoUrl && !logoFailed ? (
               <img
-                src={settings.logoUrl}
+                src={resolveAssetUrl(settings.logoUrl)}
                 alt={schoolName}
                 referrerPolicy="no-referrer"
                 onError={() => setLogoFailed(true)}

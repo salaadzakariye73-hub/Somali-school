@@ -24,7 +24,7 @@ import { AbsenceFollowUpModal } from '../components/attendance/AbsenceFollowUpMo
 import { ALL_GRADES, SECTIONS } from '../components/students/StudentFormModal';
 import { Button, Card, Input, Select } from '../components/ui/Primitives';
 import { useAuth } from '../contexts/AuthContext';
-import { apiRequest } from '../services/api';
+import { apiRequest, resolveAssetUrl } from '../services/api';
 import type {
   AbsenceWarning,
   AbsenceWarningsResponse,
@@ -973,7 +973,7 @@ export function AttendancePage() {
                             <div className="flex items-center gap-3 min-w-0">
                               {item.student.photoUrl ? (
                                 <img
-                                  src={item.student.photoUrl}
+                                  src={resolveAssetUrl(item.student.photoUrl)}
                                   alt={item.student.fullName}
                                   referrerPolicy="no-referrer"
                                   className="w-8 h-8 rounded-lg object-cover border border-slate-200 dark:border-slate-700 shrink-0"
